@@ -15,7 +15,7 @@
  (name ExtUnix)
  (public_name extunix)
  (modules_without_implementation ExtUnix)
- (libraries unix bigarray bytes)
+ (libraries unix bigarray)
  (preprocess
   (per_module
    ((pps ppx_have --gen-all)
