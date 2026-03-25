@@ -18,12 +18,7 @@
             pname = "extunix";
             version = "20250621.0";
             minimumOCamlVersion = "4.13";
-            src = pkgs.fetchFromGitHub {
-              owner = "dombong";
-              repo = "extunix";
-              rev = "5e10dd70b30b6d6180b63e33c463858c2d1591ae";
-              sha256 = "sha256-0phYdjKLR6qXR03Lf8moqQPn/Wwdryo4p6d0AUZpkbE=";
-            };
+            src = ./.;
             nativeBuildInputs = with ocamlPackages; [ findlib ocaml ];
 
             buildInputs = with ocamlPackages; [
