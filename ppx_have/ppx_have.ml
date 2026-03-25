@@ -154,7 +154,12 @@ let show_me_the_money_expand ~ctxt doc =
       [ case ~lhs:[%pat? _] ~guard:None ~rhs:[%expr None] ]
   in
   if !all then
-    let expr = pexp_function ~loc (make_have ()) in
+    (* Use pexp_fun + pexp_match for ppxlib compatibility across versions *)
+    let param_name = "x" in
+    let param_pat = ppat_var ~loc (Ocaml_common.Location.mknoloc param_name) in
+    let param_expr = pexp_ident ~loc (Ocaml_common.Location.mknoloc (Longident.Lident param_name)) in
+    let match_expr = pexp_match ~loc param_expr (make_have ()) in
+    let expr = pexp_fun ~loc Nolabel None param_pat match_expr in
     let pat = ppat_var ~loc (Ocaml_common.Location.mknoloc "have") in
     let vb = value_binding ~loc ~pat ~expr in
     let vb = { vb with pvb_attributes = doc :: vb.pvb_attributes } in
